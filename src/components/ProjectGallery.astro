@@ -1,0 +1,132 @@
+---
+// src/components/ProjectGallery.astro
+// Galería de actividades — Círculo Vital
+// Muestra fotos de las actividades organizadas por plan.
+// Importa datos desde src/data/projects.ts
+
+import { categories, projects, type ProjectImage } from '@/data/projects';
+---
+
+<section id="actividades" class="py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-14 reveal">
+      <span
+        class="inline-block mb-3 text-xs font-semibold uppercase tracking-[0.2em]"
+        style="color: var(--color-accent-600);"
+      >
+        Nuestras Actividades
+      </span>
+      <h2 class="section-title mb-4">
+        Así trabajamos con tu familiar
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Cada sesión combina ejercicio, acompañamiento y cercanía humana.
+        Conoce algunas de nuestras actividades.
+      </p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-10 reveal" id="gallery-filters">
+      {categories.map((cat) => (
+        <button
+          type="button"
+          class={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${cat.id === 'todos' ? 'active' : ''}`}
+          data-filter={cat.id}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+      {projects.map((project) =>
+        project.images.map((img) => (
+          <article
+            class="gallery-card group rounded-2xl overflow-hidden transition-all duration-500"
+            style="background-color: var(--bg-card); border: 1px solid var(--border-subtle);"
+            data-category={project.category}
+          >
+            {/* Image */}
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={`background-image: url('${img.src}'); background-color: var(--color-primary-200);`}
+              ></div>
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+            </div>
+
+            {/* Card info */}
+            <div class="p-5">
+              <h3 class="text-base font-heading font-bold mb-1" style="color: var(--text-heading);">
+                {img.title}
+              </h3>
+              <p class="text-sm leading-relaxed mb-2" style="color: var(--text-muted);">
+                {img.description}
+              </p>
+              {img.location && (
+                <div class="flex items-center gap-1.5 text-xs" style="color: var(--text-muted); opacity: 0.7;">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>{img.location}</span>
+                </div>
+              )}
+            </div>
+          </article>
+        ))
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .filter-btn {
+    color: var(--text-muted);
+    background-color: transparent;
+    border: 1px solid var(--border-default);
+  }
+
+  .filter-btn:hover {
+    color: var(--text-heading);
+    border-color: var(--color-primary-400);
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-primary-600);
+    color: white;
+    border-color: var(--color-primary-600);
+  }
+
+  .gallery-card.hidden-card {
+    display: none;
+  }
+</style>
+
+<script>
+  // Gallery filter
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.gallery-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter || 'todos';
+
+      // Update active button
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide cards
+      cards.forEach((card) => {
+        if (filter === 'todos' || card.dataset.category === filter) {
+          card.classList.remove('hidden-card');
+        } else {
+          card.classList.add('hidden-card');
+        }
+      });
+    });
+  });
+</script>

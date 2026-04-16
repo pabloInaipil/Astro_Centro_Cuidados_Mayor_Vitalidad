@@ -1,0 +1,394 @@
+---
+// src/components/Hero.astro
+// Hero fullscreen con slider de imágenes — Círculo Vital
+// Slides configurados en site.ts (single source of truth).
+// background-image inline (NO <img> + object-cover) — regla crítica.
+// Sin video layer (no aplica a este rubro).
+
+import { site } from '@/config/site';
+
+const slides = site.heroSlides;
+---
+
+<section id="inicio" class="hero-slider relative w-full overflow-hidden">
+
+  <!-- ===== SLIDER DE IMÁGENES ===== -->
+  <div
+    id="hero-track"
+    class="hero-track absolute inset-0 z-10 flex transition-transform duration-700"
+    style={`width: ${slides.length * 100}%;`}
+  >
+    {slides.map((slide, i) => (
+      <div
+        class="hero-slide relative flex-shrink-0 flex items-center justify-center"
+        style={[
+          `width: ${100 / slides.length}%;`,
+          slide.image ? `background-image: url('${slide.image}');` : '',
+          'background-size: cover;',
+          'background-position: center;',
+          'background-repeat: no-repeat;',
+          'background-color: #0D2814;',
+        ].join(' ')}
+        data-index={i}
+      >
+        <!-- Overlay oscuro por slide -->
+        <div class="hero-overlay"></div>
+
+        <!-- Contenido del slide -->
+        <div class="relative z-20 text-center px-4 max-w-4xl mx-auto hero-slide-content">
+          <h2 class="hero-title" set:html={slide.title.replace('\n', '<br/>')} />
+
+          {slide.subtitle && (
+            <p class="hero-subtitle">{slide.subtitle}</p>
+          )}
+
+          <a href="#contacto" class="hero-cta">
+            {slide.cta || 'Agendar Sesión'}
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- ===== FLECHAS DE NAVEGACIÓN ===== -->
+  <button
+    type="button"
+    id="hero-prev"
+    class="hero-arrow hero-arrow-prev"
+    aria-label="Slide anterior"
+  >
+    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button
+    type="button"
+    id="hero-next"
+    class="hero-arrow hero-arrow-next"
+    aria-label="Slide siguiente"
+  >
+    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <!-- ===== DOTS ===== -->
+  <div class="hero-dots" id="hero-dots">
+    {slides.map((_, i) => (
+      <button
+        type="button"
+        class={`hero-dot ${i === 0 ? 'active' : ''}`}
+        data-slide={i}
+        aria-label={`Ir al slide ${i + 1}`}
+      />
+    ))}
+  </div>
+
+  <!-- ===== WAVE INFERIOR ===== -->
+  <div class="absolute bottom-0 left-0 right-0 z-30 pointer-events-none" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block">
+      <path d="M0 30L60 28C120 26 240 22 360 24C480 26 600 34 720 36C840 38 960 34 1080 30C1200 26 1320 22 1380 20L1440 18V61H0V30Z" style="fill: var(--bg-body);" />
+    </svg>
+  </div>
+</section>
+
+<style>
+  /* ===== Hero container — mobile-first responsive ===== */
+  .hero-slider {
+    height: 65dvh;
+    min-height: 350px;
+    max-height: 500px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-slider {
+      height: 70dvh;
+      min-height: 450px;
+      max-height: 650px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-slider {
+      height: 100dvh;
+      min-height: 600px;
+      max-height: none;
+    }
+  }
+
+  /* ===== Track y slides ===== */
+  .hero-track { height: 100%; }
+  .hero-slide { height: 100%; }
+
+  /* ===== Overlay con variable CSS ===== */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--hero-overlay);
+  }
+
+  /* ===== Tipografía Hero ===== */
+  .hero-title {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: white !important;
+    background: var(--color-accent-500);
+    border: none;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+  }
+
+  .hero-cta:hover {
+    background: var(--color-accent-600);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 152, 31, 0.35);
+  }
+
+  @media (max-width: 767px) {
+    .hero-title {
+      font-size: clamp(1.6rem, 7vw, 3rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-cta {
+      padding: 0.7rem 2rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* ===== Slide transition resets ===== */
+  .hero-slide-content.transitioning .hero-title,
+  .hero-slide-content.transitioning .hero-subtitle,
+  .hero-slide-content.transitioning .hero-cta {
+    animation: none;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .hero-slide-content.animating .hero-title {
+    animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  }
+  .hero-slide-content.animating .hero-subtitle {
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+  }
+  .hero-slide-content.animating .hero-cta {
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Arrows ===== */
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+  }
+
+  .hero-arrow:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-arrow-prev { left: 0.5rem; }
+  .hero-arrow-next { right: 0.5rem; }
+
+  @media (min-width: 768px) {
+    .hero-arrow { width: 48px; height: 48px; }
+    .hero-arrow-prev { left: 2rem; }
+    .hero-arrow-next { right: 2rem; }
+  }
+
+  /* ===== Dots ===== */
+  .hero-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-dots { bottom: 4.5rem; }
+  }
+
+  .hero-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .hero-dot.active {
+    background: white;
+    border-color: white;
+  }
+
+  .hero-dot:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.4);
+  }
+</style>
+
+<script>
+  // ============================================================
+  // HERO SLIDER — Auto-rotate + navigation
+  // ============================================================
+  const track = document.getElementById('hero-track') as HTMLElement;
+  const dots = document.querySelectorAll<HTMLButtonElement>('.hero-dot');
+  const prevBtn = document.getElementById('hero-prev');
+  const nextBtn = document.getElementById('hero-next');
+  const slides = document.querySelectorAll<HTMLElement>('.hero-slide');
+  const totalSlides = slides.length;
+
+  let currentSlide = 0;
+  let autoplayTimer: ReturnType<typeof setInterval>;
+  const AUTOPLAY_INTERVAL = 5000;
+
+  function goToSlide(index: number, animate = true) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+
+    const currentContent = slides[currentSlide]?.querySelector('.hero-slide-content');
+    currentContent?.classList.remove('animating');
+    currentContent?.classList.add('transitioning');
+
+    currentSlide = index;
+
+    if (animate) {
+      track.style.transition = 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+    } else {
+      track.style.transition = 'none';
+    }
+    track.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
+
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+
+    const newContent = slides[index]?.querySelector('.hero-slide-content');
+    if (newContent) {
+      newContent.classList.remove('animating');
+      newContent.classList.add('transitioning');
+      void (newContent as HTMLElement).offsetWidth;
+      newContent.classList.remove('transitioning');
+      newContent.classList.add('animating');
+    }
+  }
+
+  function nextSlide() { goToSlide(currentSlide + 1); }
+  function prevSlide() { goToSlide(currentSlide - 1); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_INTERVAL);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+  }
+
+  nextBtn?.addEventListener('click', () => { nextSlide(); startAutoplay(); });
+  prevBtn?.addEventListener('click', () => { prevSlide(); startAutoplay(); });
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      goToSlide(Number(dot.dataset.slide));
+      startAutoplay();
+    });
+  });
+
+  const heroSection = document.querySelector('.hero-slider');
+  heroSection?.addEventListener('mouseenter', stopAutoplay);
+  heroSection?.addEventListener('mouseleave', startAutoplay);
+
+  // Touch swipe
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  heroSection?.addEventListener('touchstart', (e) => {
+    touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+    stopAutoplay();
+  }, { passive: true });
+
+  heroSection?.addEventListener('touchend', (e) => {
+    touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide(); else prevSlide();
+    }
+    startAutoplay();
+  }, { passive: true });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { nextSlide(); startAutoplay(); }
+    if (e.key === 'ArrowLeft') { prevSlide(); startAutoplay(); }
+  });
+
+  startAutoplay();
+</script>

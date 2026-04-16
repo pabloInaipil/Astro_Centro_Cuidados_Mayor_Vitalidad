@@ -1,0 +1,312 @@
+/* src/styles/global.css */
+/* ============================================================
+   Círculo Vital — Movimiento y Salud
+   Paleta extraída del logo: verde oscuro (primary), dorado (accent)
+   ============================================================ */
+
+@import 'tailwindcss';
+
+/* ─── PALETA: PRIMARY (Verde) ──────────────────────────────── */
+/* Base del logo: verde bosque ~ #1B6B3A                        */
+
+:root {
+  /* Primary — Verde */
+  --color-primary-50:  #F0F9F3;
+  --color-primary-100: #DBEFDF;
+  --color-primary-200: #B9E0C2;
+  --color-primary-300: #8CCC9A;
+  --color-primary-400: #5DB36E;
+  --color-primary-500: #3A9B52;
+  --color-primary-600: #2A7E40;
+  --color-primary-700: #236B36;
+  --color-primary-800: #1F562D;
+  --color-primary-900: #1B4726;
+  --color-primary-950: #0D2814;
+
+  /* Accent — Dorado/Ámbar */
+  --color-accent-50:  #FDF8EB;
+  --color-accent-100: #F9EDCC;
+  --color-accent-200: #F3D999;
+  --color-accent-300: #ECC266;
+  --color-accent-400: #E5AB3D;
+  --color-accent-500: #D4981F;
+  --color-accent-600: #B88016;
+  --color-accent-700: #976410;
+  --color-accent-800: #7C4F15;
+  --color-accent-900: #684118;
+  --color-accent-950: #3D220B;
+
+  /* Surface / Neutrals */
+  --color-surface-50:  #F8FAF9;
+  --color-surface-100: #F0F4F1;
+  --color-surface-200: #E1E8E3;
+  --color-surface-300: #C8D4CB;
+  --color-surface-400: #9FB5A4;
+  --color-surface-500: #7A9680;
+  --color-surface-600: #5E7963;
+  --color-surface-700: #4B6150;
+  --color-surface-800: #3E5042;
+  --color-surface-900: #354337;
+  --color-surface-950: #1B241D;
+
+  /* ─── SEMÁNTICOS: Light Mode ─────────────────────────────── */
+  --bg-body:      #FFFFFF;
+  --bg-section:   var(--color-surface-50);
+  --bg-card:      #FFFFFF;
+  --bg-card-alt:  var(--color-surface-100);
+
+  --text-heading: var(--color-primary-900);
+  --text-body:    var(--color-surface-800);
+  --text-muted:   var(--color-surface-600);
+  --text-inverse: #FFFFFF;
+
+  --border-default: var(--color-surface-200);
+  --border-subtle:  var(--color-surface-100);
+
+  /* ─── COMPONENTES ────────────────────────────────────────── */
+  --btn-primary-bg:    var(--color-primary-600);
+  --btn-primary-hover: var(--color-primary-700);
+  --btn-primary-text:  #FFFFFF;
+
+  --btn-secondary-bg:    transparent;
+  --btn-secondary-border: var(--color-primary-600);
+  --btn-secondary-text:   var(--color-primary-700);
+  --btn-secondary-hover:  var(--color-primary-50);
+
+  --input-bg:     #FFFFFF;
+  --input-border: var(--color-surface-300);
+  --input-focus:  var(--color-primary-500);
+  --input-text:   var(--color-surface-900);
+
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-text: var(--color-surface-800);
+  --nav-text-active: var(--color-primary-600);
+
+  /* Hero overlay */
+  --hero-overlay: rgba(13, 40, 20, 0.55);
+  --hero-overlay-strong: rgba(13, 40, 20, 0.70);
+}
+
+/* ─── DARK MODE ────────────────────────────────────────────── */
+[data-theme="dark"],
+.dark {
+  --bg-body:      #0F1F14;
+  --bg-section:   #142019;
+  --bg-card:      #1A2B20;
+  --bg-card-alt:  #1F3327;
+
+  --text-heading: var(--color-surface-100);
+  --text-body:    var(--color-surface-300);
+  --text-muted:   var(--color-surface-500);
+  --text-inverse: var(--color-primary-950);
+
+  --border-default: var(--color-surface-800);
+  --border-subtle:  var(--color-surface-900);
+
+  --btn-primary-bg:    var(--color-primary-500);
+  --btn-primary-hover: var(--color-primary-400);
+  --btn-primary-text:  #FFFFFF;
+
+  --btn-secondary-border: var(--color-primary-400);
+  --btn-secondary-text:   var(--color-primary-300);
+  --btn-secondary-hover:  rgba(58, 155, 82, 0.1);
+
+  --input-bg:     #1A2B20;
+  --input-border: var(--color-surface-700);
+  --input-focus:  var(--color-primary-400);
+  --input-text:   var(--color-surface-100);
+
+  --nav-bg: rgba(15, 31, 20, 0.95);
+  --nav-text: var(--color-surface-300);
+  --nav-text-active: var(--color-primary-400);
+
+  --hero-overlay: rgba(10, 25, 14, 0.60);
+  --hero-overlay-strong: rgba(10, 25, 14, 0.75);
+}
+
+/* ─── BASE STYLES ──────────────────────────────────────────── */
+body {
+  background-color: var(--bg-body);
+  color: var(--text-body);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── TYPOGRAPHY ───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  color: var(--text-heading);
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-heading);
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--text-muted);
+  max-width: 42rem;
+  line-height: 1.7;
+}
+
+/* ─── BUTTONS ──────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 126, 64, 0.3);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  font-weight: 600;
+  border-radius: 0.75rem;
+  border: 2px solid var(--btn-secondary-border);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover);
+  transform: translateY(-1px);
+}
+
+/* ─── FORMS ────────────────────────────────────────────────── */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-body);
+  margin-bottom: 0.375rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 0.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.9375rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(42, 126, 64, 0.15);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ─── CARDS ────────────────────────────────────────────────── */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── SCROLL REVEAL ────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── FOOTER OVERRIDES ─────────────────────────────────────── */
+footer h3 {
+  color: #FFFFFF;
+}
+
+footer p {
+  color: var(--color-surface-400);
+}
+
+footer a {
+  color: var(--color-surface-300);
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--color-accent-400);
+}
+
+/* ─── ACCENT UTILITIES ─────────────────────────────────────── */
+.text-accent-400 {
+  color: var(--color-accent-400);
+}
+
+.text-accent-600 {
+  color: var(--color-accent-600);
+}
+
+.bg-primary-600 {
+  background-color: var(--color-primary-600);
+}
+
+.bg-primary-950 {
+  background-color: var(--color-primary-950);
+}
+
+/* ─── SELECTION ────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+/* ─── SCROLLBAR ────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-500);
+}

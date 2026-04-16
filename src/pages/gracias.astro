@@ -1,0 +1,70 @@
+---
+// src/pages/gracias.astro
+// Página de confirmación post-envío del formulario de contacto.
+// ⚠️ CRÍTICA PARA CONVERSIONES: Google Ads trackea esta URL como destino de conversión.
+// NO eliminar ni renombrar esta página.
+
+import Layout from '@layouts/Layout.astro';
+import { site } from '@/config/site';
+---
+
+<Layout title={`Mensaje Enviado — ${site.shortName}`} noindex={true}>
+  <section class="min-h-[70vh] flex items-center justify-center px-4 pt-20">
+    <div class="text-center max-w-lg">
+      <!-- Check icon -->
+      <div
+        class="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
+        style="background-color: var(--color-accent-100);"
+      >
+        <svg
+          class="w-10 h-10"
+          style="color: var(--color-accent-600);"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h1 class="text-3xl font-heading font-bold mb-4" style="color: var(--text-heading);">
+        ¡Mensaje Enviado!
+      </h1>
+      <p class="text-lg mb-3" style="color: var(--text-body);">
+        Gracias por tu interés en {site.shortName}. Hemos recibido tu consulta.
+      </p>
+      <p class="text-base mb-8" style="color: var(--text-muted);">
+        Te contactaremos en menos de 24 horas para coordinar la evaluación inicial.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="btn-primary px-8 py-3">
+          Volver al Inicio
+        </a>
+        {site.whatsapp && (
+          <a
+            href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Hola, acabo de enviar una consulta por la web de ' + site.shortName)}`}
+            target="_blank"
+            rel="noopener"
+            class="btn-secondary px-8 py-3"
+            data-gtm="whatsapp-gracias"
+            data-gtm-label="WhatsApp Gracias"
+          >
+            Escribir por WhatsApp
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- GTM: Evento de conversión al cargar la página de gracias -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'form_conversion',
+      form_name: 'consulta',
+      page_type: 'thank_you',
+    });
+  </script>
+</Layout>

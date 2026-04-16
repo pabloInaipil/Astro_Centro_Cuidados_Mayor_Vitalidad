@@ -1,0 +1,24 @@
+---
+// src/pages/404.astro
+import Layout from '@layouts/Layout.astro';
+import { site } from '@/config/site';
+---
+
+<Layout title={`Página no encontrada — ${site.shortName}`} noindex={true}>
+  <section class="min-h-[70vh] flex items-center justify-center px-4 pt-20">
+    <div class="text-center max-w-lg">
+      <div class="text-8xl font-heading font-extrabold mb-4" style="color: var(--color-primary-200);">
+        404
+      </div>
+      <h1 class="text-2xl font-heading font-bold mb-3" style="color: var(--text-heading);">
+        Página no encontrada
+      </h1>
+      <p class="text-base mb-8" style="color: var(--text-muted);">
+        La página que buscas no existe o fue movida.
+      </p>
+      <a href="/" class="btn-primary px-8 py-3">
+        Volver al Inicio
+      </a>
+    </div>
+  </section>
+</Layout>

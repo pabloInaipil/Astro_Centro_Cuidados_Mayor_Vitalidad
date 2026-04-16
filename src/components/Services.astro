@@ -1,0 +1,118 @@
+---
+// src/components/Services.astro
+// Sección de planes/servicios — Círculo Vital
+// 3 planes importados desde site.ts (single source of truth).
+// Layout: cards con iconos, descripción y lista de features.
+
+import { site } from '@/config/site';
+
+// Mapa de iconos SVG path para cada plan
+const iconMap: Record<string, string> = {
+  'heart-pulse': 'M3.343 7.778a4.5 4.5 0 017.339-1.46c.065.075.127.153.186.233a4.5 4.5 0 017.474 1.227 4.5 4.5 0 01-.858 5.06L12 18.364l-5.484-5.526a4.5 4.5 0 01-.173-4.06zM12 6.5l-.354-.354.354.354z M4.5 12l1.5-1.5M7 14.5l1-1M19.5 12l-1.5-1.5M17 14.5l-1-1',
+  'users': 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  'brain': 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+};
+---
+
+<section id="servicios" class="py-20 lg:py-28" style="background-color: var(--bg-section);">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-14 lg:mb-18 reveal">
+      <span
+        class="inline-block mb-3 text-xs font-semibold uppercase tracking-[0.2em]"
+        style="color: var(--color-accent-600);"
+      >
+        Nuestros Planes
+      </span>
+      <h2 class="section-title mb-4">
+        Acompañamiento integral <br class="hidden sm:block" />para tu familiar mayor
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Tres planes diseñados para cubrir las necesidades físicas, sociales y cognitivas
+        del adulto mayor, todo en la comodidad de su hogar.
+      </p>
+    </div>
+
+    <!-- Grid de servicios — 3 columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+      {site.services.map((service, idx) => (
+        <div
+          class="group relative rounded-2xl p-7 lg:p-8 transition-all duration-300 hover:-translate-y-1 reveal"
+          style="background-color: var(--bg-card); border: 1px solid var(--border-subtle);"
+        >
+          {/* Hover shadow layer */}
+          <div
+            class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style="box-shadow: 0 8px 30px rgba(42, 126, 64, 0.12);"
+            aria-hidden="true"
+          ></div>
+
+          <div class="relative z-10">
+            {/* Icon */}
+            <div
+              class="w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300"
+              style="background-color: var(--color-primary-100);"
+            >
+              <svg
+                class="w-7 h-7 transition-colors duration-300"
+                style="color: var(--color-primary-600);"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={iconMap[service.icon] || iconMap['heart-pulse']} />
+              </svg>
+            </div>
+
+            {/* Title */}
+            <h3 class="text-xl font-heading font-bold mb-2" style="color: var(--text-heading);">
+              {service.title}
+            </h3>
+
+            {/* Description */}
+            <p class="text-sm leading-relaxed mb-5" style="color: var(--text-muted);">
+              {service.description}
+            </p>
+
+            {/* Features list */}
+            {service.features && service.features.length > 0 && (
+              <ul class="space-y-2.5 mb-5">
+                {service.features.map((feature) => (
+                  <li class="flex items-start gap-2 text-sm" style="color: var(--text-body);">
+                    <svg
+                      class="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style="color: var(--color-primary-500);"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* CTA link */}
+            <a
+              href="#contacto"
+              class="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-200"
+              style="color: var(--color-accent-600);"
+            >
+              Consultar este plan
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
