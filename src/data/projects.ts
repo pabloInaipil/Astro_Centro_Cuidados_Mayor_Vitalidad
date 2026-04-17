@@ -1,13 +1,13 @@
 // src/data/projects.ts
 // ============================================================
 // FUENTE ÚNICA DE DATOS — Galería de Actividades
-// Adaptado de ProjectGallery para mostrar actividades del servicio
-// en lugar de proyectos de construcción.
+// Imágenes verificadas en /public/actividades/
 //
-// Importado por:
-//   - ProjectGallery.astro (página principal → renombrar a ActivityGallery)
-//
-// TODO: Reemplazar imágenes placeholder con fotos reales de sesiones
+// TODO: Agregar imágenes faltantes:
+//   - caminataTecnica/ (Plan Vitalidad)
+//   - rutasBarrios/ (Plan Conectado)
+//   - salidaAbastecimiento/ (Plan Conectado)
+//   - memoriasRecetasFam/ (Plan Legado)
 // ============================================================
 
 export interface ProjectImage {
@@ -38,24 +38,21 @@ export const projects: Project[] = [
     category: 'vitalidad',
     images: [
       {
-        src: '/proyectos/vitalidad/vitalidad-01.webp',
-        alt: 'Ejercicio de equilibrio con adulto mayor',
+        src: '/actividades/equilibrio/equilibrio.png',
+        alt: 'Ejercicio de equilibrio con adulto mayor en casa',
         title: 'Ejercicios de Equilibrio',
         description:
           'Rutina guiada de equilibrio funcional para prevención de caídas, adaptada a las capacidades de cada persona.',
         location: 'Ñuñoa, Santiago',
       },
+    ],
+  },
+  {
+    category: 'vitalidad',
+    images: [
       {
-        src: '/proyectos/vitalidad/vitalidad-02.webp',
-        alt: 'Caminata guiada por el barrio',
-        title: 'Caminata con Técnica de Marcha Segura',
-        description:
-          'Salida guiada de 30 minutos con corrección postural y técnica de marcha para mejorar la seguridad al caminar.',
-        location: 'Providencia, Santiago',
-      },
-      {
-        src: '/proyectos/vitalidad/vitalidad-03.webp',
-        alt: 'Ejercicios de fuerza funcional en casa',
+        src: '/actividades/FuerzaFuncional/fuerzafuncional.png',
+        alt: 'Ejercicios de fuerza funcional con adulto mayor',
         title: 'Fuerza Funcional en Casa',
         description:
           'Ejercicios de fuerza adaptados con bandas elásticas y peso corporal, enfocados en movimientos de la vida diaria.',
@@ -71,28 +68,12 @@ export const projects: Project[] = [
     category: 'conectado',
     images: [
       {
-        src: '/proyectos/conectado/conectado-01.webp',
-        alt: 'Clase de uso de WhatsApp',
+        src: '/actividades/alfabetizacionDigital/alfabetizaciondigital.png',
+        alt: 'Clase de uso de smartphone y WhatsApp',
         title: 'Alfabetización Digital',
         description:
           'Clases paso a paso para dominar WhatsApp, videollamadas y redes sociales, manteniendo la conexión con la familia.',
         location: 'Ñuñoa, Santiago',
-      },
-      {
-        src: '/proyectos/conectado/conectado-02.webp',
-        alt: 'Salida recreativa a café del barrio',
-        title: 'Rutas de Barrio',
-        description:
-          'Salidas recreativas a cafés de Barrio Italia, Pocuro o Plaza Ñuñoa para fomentar la socialización y el bienestar emocional.',
-        location: 'Barrio Italia, Santiago',
-      },
-      {
-        src: '/proyectos/conectado/conectado-03.webp',
-        alt: 'Acompañamiento a supermercado',
-        title: 'Salida de Abastecimiento',
-        description:
-          'Acompañamiento seguro al banco, farmacia o supermercado del barrio con supervisión profesional.',
-        location: 'Providencia, Santiago',
       },
     ],
   },
@@ -104,28 +85,33 @@ export const projects: Project[] = [
     category: 'legado',
     images: [
       {
-        src: '/proyectos/legado/legado-01.webp',
-        alt: 'Ejercicios de estimulación cognitiva',
+        src: '/actividades/estimulacionCognitiva/estimulacioncognitiva.png',
+        alt: 'Ejercicios de estimulación cognitiva con puzzles',
         title: 'Estimulación Cognitiva',
         description:
           'Juegos de agilidad mental, desafíos de memoria y ejercicios de reminiscencia con música y noticias.',
         location: 'Ñuñoa, Santiago',
       },
       {
-        src: '/proyectos/legado/legado-02.webp',
+        src: '/actividades/estimulacionCognitiva/estimulacioncognitiva2.png',
+        alt: 'Sesión de estimulación cognitiva grupal',
+        title: 'Desafíos de Memoria',
+        description:
+          'Actividades de reminiscencia que combinan juegos, música y recuerdos para mantener la mente activa.',
+        location: 'Ñuñoa, Santiago',
+      },
+    ],
+  },
+  {
+    category: 'legado',
+    images: [
+      {
+        src: '/actividades/herenciaDigital/herenciadigital.png',
         alt: 'Digitalización de álbum de fotos antiguo',
         title: 'Herencia Digital',
         description:
           'Organización y digitalización de álbumes fotográficos antiguos, preservando la historia familiar para las nuevas generaciones.',
         location: 'Providencia, Santiago',
-      },
-      {
-        src: '/proyectos/legado/legado-03.webp',
-        alt: 'Redacción de memorias familiares',
-        title: 'Memorias y Recetas Familiares',
-        description:
-          'Sesiones de escritura guiada para preservar recuerdos, anécdotas y recetas que son patrimonio de la familia.',
-        location: 'Ñuñoa, Santiago',
       },
     ],
   },
