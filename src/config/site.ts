@@ -83,7 +83,7 @@ export const site: SiteConfig = {
   // TODO: Reemplazar con datos reales del profesional
   phone: '+56900000000',
   phoneDisplay: '+56 9 0000 0000',
-  email: 'contacto@mayorvitalidad.cl',
+  email: 'profekarin04@gmail.com',
   whatsapp: '56900000000',
   whatsappMessage:
     'Hola, me interesa conocer los planes de acompañamiento para un familiar mayor. ¿Podemos conversar?',
@@ -109,7 +109,7 @@ export const site: SiteConfig = {
 
   // ─── Web3Forms ────────────────────────────────────────────
   // TODO: Crear Access Key en web3forms.com para este cliente
-  web3formsKey: '',
+  web3formsKey: 'a557006f-fda0-4bb5-9b00-5f0ce481f872',
 
   // ─── Servicios (3 Planes) ─────────────────────────────────
   services: [
