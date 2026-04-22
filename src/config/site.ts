@@ -81,10 +81,10 @@ export const site: SiteConfig = {
 
   // ─── Contacto ─────────────────────────────────────────────
   // TODO: Reemplazar con datos reales del profesional
-  phone: '+56900000000',
-  phoneDisplay: '+56 9 0000 0000',
+  phone: '56966787544',
+  phoneDisplay: '+56 9 6678 7544',
   email: 'profekarin04@gmail.com',
-  whatsapp: '56900000000',
+  whatsapp: '56966787544',
   whatsappMessage:
     'Hola, me interesa conocer los planes de acompañamiento para un familiar mayor. ¿Podemos conversar?',
 
