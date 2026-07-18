@@ -28,18 +28,18 @@
 /* Base del logo: verde bosque ~ #1B6B3A                        */
 
 :root {
-  /* Primary — Verde */
-  --color-primary-50:  #F0F9F3;
-  --color-primary-100: #DBEFDF;
-  --color-primary-200: #B9E0C2;
-  --color-primary-300: #8CCC9A;
-  --color-primary-400: #5DB36E;
-  --color-primary-500: #3A9B52;
-  --color-primary-600: #2A7E40;
-  --color-primary-700: #236B36;
-  --color-primary-800: #1F562D;
-  --color-primary-900: #1B4726;
-  --color-primary-950: #0D2814;
+  /* Primary — Verde emerald (más claro y vibrante) */
+  --color-primary-50:  #EDFCF3;
+  --color-primary-100: #D2F9E0;
+  --color-primary-200: #A7F0C6;
+  --color-primary-300: #6FE4A6;
+  --color-primary-400: #38D083;
+  --color-primary-500: #12B26B;
+  --color-primary-600: #0A824B;
+  --color-primary-700: #0A6B40;
+  --color-primary-800: #0B5636;
+  --color-primary-900: #0A472F;
+  --color-primary-950: #04291B;
 
   /* Accent — Dorado/Ámbar */
   --color-accent-50:  #FDF8EB;
@@ -75,7 +75,7 @@
 
   --text-heading: var(--color-primary-900);
   --text-body:    var(--color-surface-800);
-  --text-muted:   var(--color-surface-600);
+  --text-muted:   var(--color-surface-700);
   --text-inverse: #FFFFFF;
 
   --border-default: var(--color-surface-200);
@@ -101,8 +101,8 @@
   --nav-text-active: var(--color-primary-600);
 
   /* Hero overlay */
-  --hero-overlay: rgba(13, 40, 20, 0.55);
-  --hero-overlay-strong: rgba(13, 40, 20, 0.70);
+  --hero-overlay: rgba(4, 41, 27, 0.55);
+  --hero-overlay-strong: rgba(4, 41, 27, 0.70);
 }
 
 /* ─── DARK MODE ────────────────────────────────────────────── */
@@ -115,7 +115,7 @@
 
   --text-heading: var(--color-surface-100);
   --text-body:    var(--color-surface-300);
-  --text-muted:   var(--color-surface-500);
+  --text-muted:   var(--color-surface-400);
   --text-inverse: var(--color-primary-950);
 
   --border-default: var(--color-surface-800);
@@ -123,11 +123,11 @@
 
   --btn-primary-bg:    var(--color-primary-500);
   --btn-primary-hover: var(--color-primary-400);
-  --btn-primary-text:  #FFFFFF;
+  --btn-primary-text:  var(--color-primary-950);
 
   --btn-secondary-border: var(--color-primary-400);
   --btn-secondary-text:   var(--color-primary-300);
-  --btn-secondary-hover:  rgba(58, 155, 82, 0.1);
+  --btn-secondary-hover:  rgba(18, 178, 107, 0.1);
 
   --input-bg:     #1A2B20;
   --input-border: var(--color-surface-700);
@@ -156,6 +156,14 @@ h1, h2, h3, h4, h5, h6,
 .font-heading {
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   color: var(--text-heading);
+}
+
+/* Un heading con text-white (sobre paneles/gradientes oscuros) debe
+   quedar blanco: la regla de color de heading no debe pisarlo. */
+.font-heading.text-white,
+h1.text-white, h2.text-white, h3.text-white,
+h4.text-white, h5.text-white, h6.text-white {
+  color: #FFFFFF;
 }
 
 .section-title {
@@ -191,7 +199,7 @@ h1, h2, h3, h4, h5, h6,
 .btn-primary:hover {
   background-color: var(--btn-primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(42, 126, 64, 0.3);
+  box-shadow: 0 4px 12px rgba(10, 130, 75, 0.3);
 }
 
 .btn-secondary {
@@ -237,7 +245,7 @@ h1, h2, h3, h4, h5, h6,
 .form-input:focus {
   outline: none;
   border-color: var(--input-focus);
-  box-shadow: 0 0 0 3px rgba(42, 126, 64, 0.15);
+  box-shadow: 0 0 0 3px rgba(10, 130, 75, 0.15);
 }
 
 .form-input::placeholder {
