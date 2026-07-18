@@ -390,5 +390,10 @@ const slides = site.heroSlides;
     if (e.key === 'ArrowLeft') { prevSlide(); startAutoplay(); }
   });
 
-  startAutoplay();
+  // Respeta prefers-reduced-motion: sin auto-rotación (la navegación
+  // manual con flechas/dots/swipe sigue disponible).
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    startAutoplay();
+  }
 </script>

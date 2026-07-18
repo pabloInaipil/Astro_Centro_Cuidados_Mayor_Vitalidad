@@ -38,7 +38,7 @@ export const projects: Project[] = [
     category: 'vitalidad',
     images: [
       {
-        src: '/actividades/equilibrio/equilibrio.png',
+        src: '/actividades/equilibrio/equilibrio.webp',
         alt: 'Ejercicio de equilibrio con adulto mayor en casa',
         title: 'Ejercicios de Equilibrio',
         description:
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     category: 'vitalidad',
     images: [
       {
-        src: '/actividades/FuerzaFuncional/fuerzafuncional.png',
+        src: '/actividades/FuerzaFuncional/fuerzafuncional.webp',
         alt: 'Ejercicios de fuerza funcional con adulto mayor',
         title: 'Fuerza Funcional en Casa',
         description:
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     category: 'conectado',
     images: [
       {
-        src: '/actividades/alfabetizacionDigital/alfabetizaciondigital.png',
+        src: '/actividades/alfabetizacionDigital/alfabetizaciondigital.webp',
         alt: 'Clase de uso de smartphone y WhatsApp',
         title: 'Alfabetización Digital',
         description:
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     category: 'legado',
     images: [
       {
-        src: '/actividades/estimulacionCognitiva/estimulacioncognitiva.png',
+        src: '/actividades/estimulacionCognitiva/estimulacioncognitiva.webp',
         alt: 'Ejercicios de estimulación cognitiva con puzzles',
         title: 'Estimulación Cognitiva',
         description:
@@ -93,7 +93,7 @@ export const projects: Project[] = [
         location: 'Ñuñoa, Santiago',
       },
       {
-        src: '/actividades/estimulacionCognitiva/estimulacioncognitiva2.png',
+        src: '/actividades/estimulacionCognitiva/estimulacioncognitiva2.webp',
         alt: 'Sesión de estimulación cognitiva grupal',
         title: 'Desafíos de Memoria',
         description:
@@ -106,7 +106,7 @@ export const projects: Project[] = [
     category: 'legado',
     images: [
       {
-        src: '/actividades/herenciaDigital/herenciadigital.png',
+        src: '/actividades/herenciaDigital/herenciadigital.webp',
         alt: 'Digitalización de álbum de fotos antiguo',
         title: 'Herencia Digital',
         description:

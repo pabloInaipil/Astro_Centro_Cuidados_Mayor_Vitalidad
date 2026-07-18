@@ -11,12 +11,16 @@ import Process from '@components/Process.astro';
 import ProjectGallery from '@components/ProjectGallery.astro';
 import About from '@components/About.astro';
 import Pricing from '@components/Pricing.astro';
-import Testimonials from '@components/Testimonials.astro';
+// Testimonials oculto hasta contar con testimonios reales de familias.
+// import Testimonials from '@components/Testimonials.astro';
 import CtaBanner from '@components/CtaBanner.astro';
 import Contact from '@components/Contact.astro';
+import { site } from '@/config/site';
 ---
 
 <Layout>
+  {/* H1 semántico de la página (accesible, sin impacto visual) */}
+  <h1 class="sr-only">{site.name} — {site.tagline}. Cobertura en Ñuñoa y Providencia, Santiago.</h1>
   <Hero />
   <Stats />
   <Services />
@@ -24,7 +28,6 @@ import Contact from '@components/Contact.astro';
   <ProjectGallery />
   <About />
   <Pricing />
-  <Testimonials />
   <CtaBanner />
   <Contact />
 </Layout>
