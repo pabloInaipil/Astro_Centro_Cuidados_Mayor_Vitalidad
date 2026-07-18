@@ -34,7 +34,7 @@ const jsonLd = {
   name: site.name,
   description: site.description,
   url: site.siteUrl,
-  logo: `${site.siteUrl}/hero/logo.png`,
+  logo: `${site.siteUrl}/hero/logo.webp`,
   image: fullOgImage,
   telephone: site.phone,
   email: site.email,
@@ -76,8 +76,8 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#2A7E40" />
@@ -121,20 +121,18 @@ const jsonLd = {
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Preload fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fuentes auto-hospedadas (sin render-block de terceros) -->
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload de la imagen LCP del hero (prioridad alta) -->
+    <link rel="preload" href="/hero/slide-01.webp" as="image" fetchpriority="high" />
 
     <!-- Theme initialization (prevent FOUC) -->
+    <!-- Por defecto: modo claro. Oscuro solo si el usuario lo eligió. -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
+        if (localStorage.getItem('theme') === 'dark') {
           document.documentElement.classList.add('dark');
         }
       })();
@@ -170,7 +168,7 @@ const jsonLd = {
           <!-- Logo -->
           <a href="/" class="flex items-center gap-3 group" aria-label={`${site.shortName} — Inicio`}>
             <img
-              src="/hero/logo.png"
+              src="/hero/logo.webp"
               alt={site.shortName}
               width="40"
               height="40"
@@ -282,7 +280,7 @@ const jsonLd = {
 
           <!-- Brand -->
           <div class="lg:col-span-1">
-            <img src="/logo.png" alt={site.shortName} width="48" height="48" class="h-12 w-auto mb-4 rounded-full" />
+            <img src="/hero/logo.webp" alt={site.shortName} width="48" height="48" class="h-12 w-auto mb-4 rounded-full" />
             <p class="text-sm text-surface-300 leading-relaxed">
               {site.description}
             </p>

@@ -6,6 +6,24 @@
 
 @import 'tailwindcss';
 
+/* ─── FUENTES AUTO-HOSPEDADAS (variables, subset latin) ────── */
+/* Reemplazan Google Fonts CDN → sin render-block de terceros.  */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/plus-jakarta-sans.woff2') format('woff2');
+}
+
 /* ─── PALETA: PRIMARY (Verde) ──────────────────────────────── */
 /* Base del logo: verde bosque ~ #1B6B3A                        */
 
@@ -90,10 +108,10 @@
 /* ─── DARK MODE ────────────────────────────────────────────── */
 [data-theme="dark"],
 .dark {
-  --bg-body:      #0F1F14;
-  --bg-section:   #142019;
-  --bg-card:      #1A2B20;
-  --bg-card-alt:  #1F3327;
+  --bg-body:      #1B2C21;
+  --bg-section:   #21362A;
+  --bg-card:      #294032;
+  --bg-card-alt:  #314C3B;
 
   --text-heading: var(--color-surface-100);
   --text-body:    var(--color-surface-300);
@@ -116,7 +134,7 @@
   --input-focus:  var(--color-primary-400);
   --input-text:   var(--color-surface-100);
 
-  --nav-bg: rgba(15, 31, 20, 0.95);
+  --nav-bg: rgba(27, 44, 33, 0.95);
   --nav-text: var(--color-surface-300);
   --nav-text-active: var(--color-primary-400);
 
@@ -291,6 +309,27 @@ footer a:hover {
 ::selection {
   background-color: var(--color-primary-200);
   color: var(--color-primary-900);
+}
+
+/* ─── REDUCED MOTION (a11y) ────────────────────────────────── */
+/* Respeta la preferencia del sistema: sin animaciones ni        */
+/* transiciones. El contenido revelado por scroll queda visible. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-stagger,
+  .stat-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* ─── SCROLLBAR ────────────────────────────────────────────── */
